@@ -1,6 +1,3 @@
-#calculator-display{
-    border: 1px solid;
-    height: 50px;
-    width: 400px;
-    padding: 5px;
+.button-style {
+    margin: 2px;
 }

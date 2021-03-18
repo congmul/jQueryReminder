@@ -14,16 +14,19 @@
 
     <!-- Customize Style -->
     <link rel="stylesheet" href="style.css">
-    
+
     <title>Calculator - jQuery</title>
 </head>
 <body>
     <div class="container">
-        <div>
-            <h1>Calculator</h1>
-        </div>
-        <div id="calculator-display"></div>
-        <div id="calculator-body">
+        <div class="row calculator-frame">
+            <div id="calculator-display"></div>
+            
+            <div id="calculator-body" class="row">
+                <div id="calculator-topMenu" class="row"></div>
+                <div id="calculator-number" class="col-10"></div>
+                <div id="calculator-operator" class="col-2"></div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
