@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working Movie App</title>
+
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <h1>Movie Search</h1>
+    <div id="movie-btn"></div>
+    <div style="margin: 30px 0;">
+        <label>Add a Movie, Yo!</label>
+        <input type="input" id="movie-input">
+        <br><br>
+        <input type="submit" id="add-Button" value="Add a Movie, Yo!">
+    </div>
+    <div id="display-movie"></div>
+    <script>
+        $(document).ready(function () {
+
+            function displayMovie(){
+                let movieName = $(this).val();
+                const queryURL = "https://www.omdbapi.com/?t=" + movieName + "&apikey=trilogy";
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then((res) => {
+                    console.log(res);
+                    const divEl = $("<div>")
+                    const h3El = $("<h3>") 
+                    const ratingEl = $("<p>")
+                    const releasedEl = $("<p>")    
+                    const plotEl = $("<p>") 
+                    const imgEl = $("<img>")
+                    h3El.text(res.Title)
+                    ratingEl.text("Rating: "+res.Rated)
+                    releasedEl.text("Released: "+res.Released)
+                    plotEl.text("Plot: " +res.Plot)
+                    imgEl.attr("src", res.Poster)
+                    imgEl.attr("alt", "moviePoster")
+                    divEl.append(h3El)
+                    divEl.append(ratingEl)
+                    divEl.append(releasedEl)
+                    divEl.append(plotEl)
+                    divEl.append(imgEl)
+                    $("#display-movie").prepend(divEl)
+                })
+
+            }
+
+
+            let basicMovies = ["The Matrix", "The Notebook", "Mr. Nobody", "The Lion King"];
+
+            function buttonRender() {
+                $("#movie-btn").text("")
+                basicMovies.forEach(movie => {
+                    let btnEl = $("<button>")
+                    btnEl.text(movie);
+                    btnEl.attr("class", "movie-button")
+                    btnEl.attr("value", movie)
+                    btnEl.css("margin-right", "20px")
+                    // console.log(movie);
+                    $("#movie-btn").append(btnEl);
+                })
+            }
+
+            $("#add-Button").on("click", function(e){
+                e.preventDefault();
+                if(basicMovies.indexOf($("#movie-input").val()) < 0){
+                    basicMovies.push($("#movie-input").val());
+                }
+
+                buttonRender();
+            });
+
+             // Adding a click event listener to all elements with a class of "movie-button"
+            $(document).on("click", ".movie-button", displayMovie);
+
+
+            // Calling the buttonRender function initially.
+            buttonRender();
+        })
+    </script>
+</body>
+
+</html>
