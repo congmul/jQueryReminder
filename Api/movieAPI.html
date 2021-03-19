@@ -33,25 +33,36 @@
                     url: queryURL,
                     method: "GET"
                 }).then((res) => {
-                    console.log(res);
-                    const divEl = $("<div>")
-                    const h3El = $("<h3>") 
-                    const ratingEl = $("<p>")
-                    const releasedEl = $("<p>")    
-                    const plotEl = $("<p>") 
-                    const imgEl = $("<img>")
-                    h3El.text(res.Title)
-                    ratingEl.text("Rating: "+res.Rated)
-                    releasedEl.text("Released: "+res.Released)
-                    plotEl.text("Plot: " +res.Plot)
-                    imgEl.attr("src", res.Poster)
-                    imgEl.attr("alt", "moviePoster")
-                    divEl.append(h3El)
-                    divEl.append(ratingEl)
-                    divEl.append(releasedEl)
-                    divEl.append(plotEl)
-                    divEl.append(imgEl)
-                    $("#display-movie").prepend(divEl)
+                    // console.log(res);
+                    // const divEl = $("<div>")
+                    // const h3El = $("<h3>") 
+                    // const ratingEl = $("<p>")
+                    // const releasedEl = $("<p>")    
+                    // const plotEl = $("<p>") 
+                    // const imgEl = $("<img>")
+                    // h3El.text(res.Title)
+                    // ratingEl.text("Rating: "+res.Rated)
+                    // releasedEl.text("Released: "+res.Released)
+                    // plotEl.text("Plot: " +res.Plot)
+                    // imgEl.attr("src", res.Poster)
+                    // imgEl.attr("alt", "moviePoster")
+                    // divEl.append(h3El)
+                    // divEl.append(ratingEl)
+                    // divEl.append(releasedEl)
+                    // divEl.append(plotEl)
+                    // divEl.append(imgEl)
+
+                    // $("#display-movie").prepend(divEl)
+                    
+                    // BackTick
+                    const htmlQuery = `<div>
+                        <h3>${res.Title}</h3>
+                        <p>Rating: ${res.Rated}</p>
+                        <p>Released: ${res.Released}</p>
+                        <p>Plot: ${res.Plot}</p>
+                        <img src="${res.Poster}" alt="${res.Title}">
+                    </div>`
+                    $("#display-movie").prepend(htmlQuery)
                 })
 
             }
